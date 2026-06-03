@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import ProductList from "../components/product/product-category/product-list";
 import CategoryList from "../components/product/product-category/category-list";
 
-export default async function ProductListPage({
+export default async function CategoryListPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
