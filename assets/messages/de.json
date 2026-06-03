@@ -1,0 +1,32 @@
+{
+  "HomePage": {
+    "title": "Ein Warenhaus",
+    "description": "Willkommen auf unserer E-Commerce-Seite! Wir bieten eine große Auswahl an Produkten, um all Ihren Bedürfnissen gerecht zu werden. Egal, ob Sie die neuesten Gadgets, modische Kleidung oder Wohnaccessoires suchen – wir haben genau das Richtige für Sie. Unsere benutzerfreundliche Oberfläche und sicheren Zahlungsmethoden sorgen für ein reibungsloses Einkaufserlebnis. Entdecken Sie unsere Kollektion und finden Sie die perfekten Artikel, die zu Ihrem Stil und Ihren Vorlieben passen. Viel Spaß beim Shoppen!",
+    "continue": "Weiter einkaufen"
+  },
+  "AboutPage": {
+    "title": "Über uns",
+    "description": "Willkommen auf unserer E-Commerce-Seite! Wir bieten eine große Auswahl an Produkten, um all Ihren Bedürfnissen gerecht zu werden. Egal, ob Sie die neuesten Gadgets, modische Kleidung oder Wohnaccessoires suchen – wir haben genau das Richtige für Sie. Unsere benutzerfreundliche Oberfläche und sicheren Zahlungsmethoden sorgen für ein reibungsloses Einkaufserlebnis. Entdecken Sie unsere Kollektion und finden Sie die perfekten Artikel, die zu Ihrem Stil und Ihren Vorlieben passen. Viel Spaß beim Shoppen!"
+  },
+  "ProductListPage": {
+    "title": "Produkte",
+    "description": "Durchsuchen Sie unsere Produktkollektion"
+  },
+  "ProductDetailPage": {
+    "title": "Produktdetails",
+    "description": "Produktdaten anzeigen für Produkt-ID:"
+  },
+  "NotFoundPage": {
+    "description": "Die angeforderte Seite wurde nicht gefunden.",
+    "title": "404 | Seite nicht gefunden",
+    "goBack": "Zur Startseite zurückkehren"
+  },
+  "ErrorPage": {
+    "description": "<p>Es ist leider ein Fehler aufgetreten.</p><p>Sie können versuchen, die Seite, die Sie besucht haben, <retry>neu zu laden</retry>.</p>",
+    "title": "Etwas ist schiefgelaufen!"
+  },
+  "LanguageSwitcher": {
+    "label": "Sprache wechseln",
+    "locale": "{locale, select, de {Deutsch} en {Englisch} other {Unbekannt}}"
+  }
+}
