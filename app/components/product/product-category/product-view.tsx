@@ -56,7 +56,7 @@ export default function ProductView({ id, name, price }: { id: string; name: str
                 <Link
                   key={product.id}
                   href={`/products/${product.id}` as any}
-                  className="relative inline-block"
+                  className="relative inline-block text-indigo-600"
                 >
                   <span aria-hidden="true" className="absolute inset-0" />
                   {product.title}
