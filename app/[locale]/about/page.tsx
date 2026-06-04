@@ -2,6 +2,19 @@ import { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { AboutPageContent } from "./about-content";
 
+import type { Metadata } from 'next';
+
+// Export a static configuration object
+export const metadata: Metadata = {
+  title: 'About Us | Next Commerce',
+  description: 'Welcome to our e-commerce site! We offer a wide range of products to cater to all your needs',
+  openGraph: {
+    title: 'About Us | Next Commerce',
+    description: 'Welcome to our e-commerce site! We offer a wide range of products to cater to all your needs',
+    type: 'website',
+  },
+};
+
 export default async function About({
   params,
 }: {

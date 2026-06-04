@@ -1,7 +1,7 @@
 import {Locale} from 'next-intl';
 import {setRequestLocale} from 'next-intl/server';
 import Image from "next/image";
-import HomeContent from './components/home-content';
+import HomeContent from '../components/home-content';
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const {locale} = await params;

@@ -20,6 +20,8 @@ export default function ProductView() {
   if (error) return <div>Failed to load.</div>;
   if (!data) return <div>Loading...</div>;
 
+ const cartData = { name: "Alice", age: 25 };
+
  return (
     <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -72,7 +74,7 @@ export default function ProductView() {
                   </span>
                   
                   {/* Add add to cart Button */}
-                  <AddToCartButton productId={product.id} />
+                  <AddToCartButton id={product.id} name={product.title} price={product.price} />
                 </div>
               </div>
 

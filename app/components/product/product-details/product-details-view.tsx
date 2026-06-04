@@ -6,7 +6,9 @@ import useSWR from "swr";
 import React, { useState } from "react";
 
 const getProduct = (url: string) =>
-  fetch(url)
+  fetch(url, {
+    next: { revalidate: 60 }, // ISR Time-based window
+  })
     .then((res) => res.json())
     .then((data: Product) => {
       console.log("Fetched Product Data From PDP:", data); // Log the raw response data

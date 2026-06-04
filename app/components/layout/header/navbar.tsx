@@ -6,6 +6,7 @@ import logoGlobe from "@/assets/globe.svg"; // Static image in the assets folder
 import React, { useState } from "react";
 import ThemeSelector from "./themeselector";
 import LanguageSwitcher from "../../share/locale-selector/LanguageSwitcher";
+import Cart from "../../Cart";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +64,7 @@ export default function Navbar() {
               PDP
             </Link>
             <span className="p-1"> | </span>
+            <Cart />
             {/* Language Switcher and Auth Links */}
             <Link
               key="login"

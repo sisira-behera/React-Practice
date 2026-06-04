@@ -2,16 +2,12 @@
 
 import { useState } from 'react';
 
-type AddToCartButtonProps = {
-  productId: string;
-};
-
-export default function AddToCartButton({ productId }: AddToCartButtonProps) {
+export default function AddToCartButton( { id, name, price }: { id: string; name: string; price: string } ) {
   const [added, setAdded] = useState(false);
 
   const handleAddToCart = () => {
     // Example: Call your cart API or update global state
-    console.log(`Product ${productId} added to cart`);
+    console.log(`Product ${id} ${name} ${price} added to cart`);
     setAdded(true);
   };
 
