@@ -23,7 +23,7 @@ export default function Login() {
      // 1. Simulating an API call authentication
     const fakeFetchedUser = {
       id: 'xyz123',
-      name: email,
+      name: email.split('@')[0], // email.split('@')[0];
       email: email,
     };
 
