@@ -80,9 +80,9 @@ export default function Navbar() {
               <Link
                 key="login"
                 href="/login"
-                className="text-sm/6 font-semibold text-gray-900 dark:text-white"
+                className="text-sm/6 font-semibold text-gray-900 text-indigo-600"
               >
-                LOG IN
+                Login
               </Link>
             )}
             <span className="p-1"> | </span>

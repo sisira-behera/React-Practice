@@ -8,7 +8,7 @@ export default function HomeContent() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+      <div className="flex flex-col items-center pb-8 gap-6 text-center sm:items-start sm:text-left">
         <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
           {t('title')}
         </h1>
