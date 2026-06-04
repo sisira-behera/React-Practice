@@ -92,4 +92,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
       - Integrate Google Fonts using next/font/google.
   - Technical Explanation: SEO optimization, dynamic metadata, and font optimization to improve Core Web Vitals.
   - Real-World Use Case: E-commerce sites use dynamic metadata to enhance search rankings and social media visibility.
+
   
