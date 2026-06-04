@@ -26,9 +26,7 @@ export default async function ProductListPage({
 
           {/* Column 2: Takes up ~66% (8 out of 12 columns) on MD and up */}
           <div className="relative w-full md:col-span-10 rounded-2xl overflow-hidden shadow-2xl">
-            <Suspense fallback={<div>Loading Products...</div>}>
-              <ProductList />
-            </Suspense>
+            <ProductList />
           </div>
         </div>
       </div>

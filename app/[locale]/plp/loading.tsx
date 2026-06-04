@@ -10,7 +10,7 @@ export default function Loading() {
 
         {/* Column 2: Takes up ~66% (8 out of 12 columns) on MD and up */}
         <div className="relative w-full md:col-span-10 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Render multiple skeletons to mimic a grid layout */}
             <CardSkeleton />
             <CardSkeleton />
