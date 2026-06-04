@@ -12,7 +12,9 @@ const fetcherProducts = (url: string) => fetch(url).then((res) => res.json()).th
     return data.products;
 });
 
-export default function ProductView() {
+export default function ProductView({ id, name, price }: { id: string; name: string; price: number }) {
+
+
   // SWR automatically uses the pre-fetched server data on initial mount
   const { data, error } = useSWR('https://dummyjson.com/products', fetcherProducts);
 
@@ -20,7 +22,6 @@ export default function ProductView() {
   if (error) return <div>Failed to load.</div>;
   if (!data) return <div>Loading...</div>;
 
- const cartData = { name: "Alice", age: 25 };
 
  return (
     <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -74,7 +75,7 @@ export default function ProductView() {
                   </span>
                   
                   {/* Add add to cart Button */}
-                  <AddToCartButton id={product.id} name={product.title} price={product.price} />
+                  <AddToCartButton id={product?.id} name={product?.title} price={Number(product?.price)} />
                 </div>
               </div>
 

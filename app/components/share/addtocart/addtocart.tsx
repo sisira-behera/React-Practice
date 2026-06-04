@@ -1,11 +1,14 @@
 'use client';
 
+import { useCart } from '@/app/[locale]/context/CartContext';
 import { useState } from 'react';
 
-export default function AddToCartButton( { id, name, price }: { id: string; name: string; price: string } ) {
+export default function AddToCartButton( { id, name, price }: { id: string; name: string; price: number } ) {
+  const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
 
   const handleAddToCart = () => {
+    addToCart({ id, name, price})
     // Example: Call your cart API or update global state
     console.log(`Product ${id} ${name} ${price} added to cart`);
     setAdded(true);

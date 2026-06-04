@@ -201,7 +201,7 @@ export default function ProductDetailsView() {
                 </div>
 
                 {/* Primary Add To Cart CTA Button */}
-                <AddToCartButton id={data.id} name={data.title} price={data.price} />
+                <AddToCartButton id={data.id} name={data.title} price={Number(data.price)} />
               </div>
             </div>
           </div>

@@ -24,7 +24,7 @@ export default async function ProductList() {
 return (
 // Pass the server data into the fallback object using the API URL as the key
     <SWRConfig value={{ fallback: { 'https://dummyjson.com/products': products } }}>
-      <ProductView />
+      <ProductView id={""} name={""} price={0} />
     </SWRConfig>
   );
 }
