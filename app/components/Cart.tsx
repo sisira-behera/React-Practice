@@ -13,7 +13,7 @@ export default function Cart() {
 
       {cart.map((item) => (
         <div key={item.id} className="flex items-center space-x-4">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center border-b border-gray-300 py-2 space-x-4">
             <div className="flex justify-between text-base font-medium text-gray-900">
               <h3>
                 <a href="#">
