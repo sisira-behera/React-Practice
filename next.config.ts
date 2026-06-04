@@ -30,8 +30,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
-  },
-  // basePath: 'https://dummyjson.com'
+  }
 }
  
 const withNextIntl = createNextIntlPlugin();

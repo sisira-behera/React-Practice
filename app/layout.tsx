@@ -1,3 +1,4 @@
+import { AuthProvider } from './[locale]/context/AuthContext';
 import { CartProvider } from './[locale]/context/CartContext';
 import './globals.css';
 
@@ -7,6 +8,8 @@ import './globals.css';
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
   <CartProvider>
-    {children}
+    <AuthProvider>
+      {children}
+    </AuthProvider>
   </CartProvider>)
 }

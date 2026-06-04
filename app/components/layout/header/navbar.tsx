@@ -7,8 +7,11 @@ import React, { useState } from "react";
 import ThemeSelector from "./themeselector";
 import LanguageSwitcher from "../../share/locale-selector/LanguageSwitcher";
 import Cart from "../../Cart";
+import { useAuth } from "@/app/[locale]/context/AuthContext";
 
 export default function Navbar() {
+  const { user, logoutUser } = useAuth();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const productId = "1"; // We can set in the props as well
@@ -66,13 +69,22 @@ export default function Navbar() {
             <span className="p-1"> | </span>
             <Cart />
             {/* Language Switcher and Auth Links */}
-            <Link
-              key="login"
-              href="/login"
-              className="text-sm/6 font-semibold text-gray-900 dark:text-white"
-            >
-              LOG IN
-            </Link>
+            {user ? (
+              <div className="flex gap-4">
+                <span>Welcome, {user.name}!</span>
+                <button onClick={logoutUser} className="text-red-500">
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link
+                key="login"
+                href="/login"
+                className="text-sm/6 font-semibold text-gray-900 dark:text-white"
+              >
+                LOG IN
+              </Link>
+            )}
             <span className="p-1"> | </span>
             <LanguageSwitcher />
             {/* Dark Mode Toggle */}
@@ -131,7 +143,8 @@ export default function Navbar() {
             LOG IN
           </Link>
           <hr />
-          <LanguageSwitcher /> <span className="p-1"> | </span> <ThemeSelector />
+          <LanguageSwitcher /> <span className="p-1"> | </span>{" "}
+          <ThemeSelector />
         </div>
       )}
     </nav>

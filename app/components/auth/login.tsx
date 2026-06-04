@@ -1,21 +1,36 @@
 "use client";
 
+import { useAuth } from "@/app/[locale]/context/AuthContext";
 import { Link } from "@/i18n/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+
+  const { loginUser } = useAuth(); // Extracted from our global context hook
 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle authentication logic here
-    console.log({ email, password, rememberMe });
-    // Simulate login — in a real app, call your auth API here
+    console.log({ email});
+
+    // Simulate API authentication success
+     // 1. Simulating an API call authentication
+    const fakeFetchedUser = {
+      id: 'xyz123',
+      name: email,
+      email: email,
+    };
+
+    // 2. Global state dispatching
+    loginUser(fakeFetchedUser); 
+
+    // 3. Navigate away to home or dashboard after successful login
     router.push("/");
   };
   return (
@@ -90,24 +105,6 @@ export default function Login() {
                   placeholder="••••••••"
                   className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-xl text-gray-950 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-all"
                 />
-              </div>
-
-              {/* Remember Me Checkbox */}
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 bg-white"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-600 select-none"
-                >
-                  Remember me for 30 days
-                </label>
               </div>
 
               {/* Submit Button */}
