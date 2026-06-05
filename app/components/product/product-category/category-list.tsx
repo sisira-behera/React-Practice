@@ -5,7 +5,7 @@ import { Categories } from "@/app/models/Categories";
 
 // Simulated async data fetch (could be from DB or API)
 async function getCategories() {
-  const response = await fetch('https://dummyjson.com/products/category-list', { cache: 'no-store' }); // ensures SSR
+  const response = await fetch('https://dummyjson.com/products/category-list', { cache: 'force-cache' }); // ensures SSR
   const data = await response.json();
   return data as Categories;
 
@@ -23,7 +23,7 @@ export default async function CategoryList() {
 
 return (
 // Pass the server data into the fallback object using the API URL as the key
-    <SWRConfig value={{ fallback: { 'https://dummyjson.com/products': categories } }}>
+    <SWRConfig value={{ fallback: { 'https://dummyjson.com/products/categories': categories } }}>
       <CategoryView />
     </SWRConfig>
   );

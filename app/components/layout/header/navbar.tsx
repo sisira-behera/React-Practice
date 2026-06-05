@@ -15,6 +15,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const productId = "1"; // We can set in the props as well
+  const catId = "beauty"; // We can set in the props as well
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md fixed w-full z-10">
@@ -46,8 +47,8 @@ export default function Navbar() {
               About
             </Link>
             <Link
-              key="category"
-              href="/category"
+              key={catId}
+              href={{ pathname: "/category/[slug]", params: { slug: catId } }}
               className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
             >
               Category
@@ -115,8 +116,8 @@ export default function Navbar() {
             About
           </Link>
           <Link
-            key="category"
-            href="/category"
+            key={catId}
+            href={{ pathname: "/category/[slug]", params: { slug: catId } }}
             className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
           >
             Category

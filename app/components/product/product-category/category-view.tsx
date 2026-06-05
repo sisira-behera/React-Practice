@@ -1,7 +1,7 @@
 "use client";
 import { Category } from "@/app/models/Categories";
+import { Link } from "@/i18n/navigation";
 import useSWR from "swr";
-
 
 const fetcherCategories = (url: string) =>
   fetch(url)
@@ -30,7 +30,18 @@ export default function CategoryView() {
           <ul>
             {/* 2. Map through the array and render each string */}
             {data?.map((category: Category) => (
-              <li key={category.slug}>{category.name}</li>
+              <li key={category.name}>
+                <Link
+                  key={category.slug}
+                  href={{
+                    pathname: "/category/[slug]",
+                    params: { slug: category.slug },
+                  }}
+                  className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
+                >
+                  {category.name}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>

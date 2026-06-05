@@ -1,30 +1,23 @@
 'use client';
 import Image from 'next/image';
-import file from '@/assets/file.svg'; // Static image in the assets folder
 import useSWR from 'swr';
 import AddToCartButton from '../../share/addtocart/addtocart';
 import { Link } from '@/i18n/navigation';
 import { Product } from '@/app/models/Product';
-import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 
 
-/* const fetcherProducts = (url: string, category: string) => fetch(`${url}?category=${category}`).then((res) => res.json()).then((data) => {
-    console.log('Fetched data:', data.products); // Log the raw response data
-    return data.products;
-}); */
 
 const fetcherProducts = (url: string) => fetch(url).then((res) => res.json()).then((data) => {
     console.log('Fetched data:', data.products); // Log the raw response data
     return data.products;
 });
 
-export default function ProductView({ id, name, price }: { id: string; name: string; price: number }) {
-  
-  
+export default function CategoryChildrenView({ slug }: { slug: string; }) {
+
+ 
   // SWR automatically uses the pre-fetched server data on initial mount
   const { data, error } = useSWR(
-    "https://dummyjson.com/products",
+    `https://dummyjson.com/products/category/${slug}`,
     fetcherProducts,
   );
 

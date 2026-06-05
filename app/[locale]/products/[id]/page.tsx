@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { ProductDetailContent } from '../product-detail-content';
 import ProductDetails from '../../../components/product/product-details/product-details';
 
+
 export default async function ProductPage({
   params,
 }: {

@@ -14,8 +14,8 @@ export const routing = defineRouting({
     '/products/[id]': {
       de: '/products/[id]'
     },
-    '/category': {
-      de: '/category' // category listing page
+    '/category/[slug]': {
+      de: '/category/[slug]' // category listing page
     },
     '/plp': {
       de: '/plp' // category listing page (PLP)
