@@ -27,23 +27,21 @@ export default function CategoryView() {
         {/* Grid Container */}
         {/* Mobile: 1 col | Tablet: 2 cols | Small Desktop: 3 cols | Large Desktop: 4 cols */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-          <ul>
-            {/* 2. Map through the array and render each string */}
+          {/* 2. Map through the array and render each string */}
+          <div>
             {data?.map((category: Category) => (
-              <li key={category.name}>
-                <Link
-                  key={category.slug}
-                  href={{
-                    pathname: "/category/[slug]",
-                    params: { slug: category.slug },
-                  }}
-                  className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
-                >
-                  {category.name}
-                </Link>
-              </li>
+              <Link
+                key={category.slug}
+                href={{
+                  pathname: "/category/[slug]",
+                  params: { slug: category.slug },
+                }}
+                className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
+              >
+                {category.name}
+              </Link>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>
