@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "@/i18n/navigation";
+import path from "path";
 
 export default function ContinueShopping({ children, href}: { children?: React.ReactNode; href?: string }) {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function ContinueShopping({ children, href}: { children?: React.R
     const id = "1"; // Example dynamic ID, replace with actual logic if needed
 
     // Execute the routing push redirect with locale support
-    router.push(`/products/${id}` as any);
+    router.push({ pathname: "/products/[id]", params: { id: id }} , { scroll: false });
   };
 
   return (

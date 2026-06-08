@@ -22,26 +22,27 @@ export default function CategoryView() {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto">
-        {/* Grid Container */}
-        {/* Mobile: 1 col | Tablet: 2 cols | Small Desktop: 3 cols | Large Desktop: 4 cols */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+        <div className="grid">
           {/* 2. Map through the array and render each string */}
-          <div>
-            {data?.map((category: Category) => (
-              <Link
-                key={category.slug}
-                href={{
-                  pathname: "/category/[slug]",
-                  params: { slug: category.slug },
-                }}
-                className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
-              >
-                {category.name}
-              </Link>
+          <ul className="nav-list">
+            {data?.map((category: Category, index: number) => (
+              <li className="w-full items-center inline-flex" key={index}>
+                <Link
+                  key={category.slug}
+                  href={{
+                    pathname: "/category/[slug]",
+                    params: { slug: category.slug },
+                  }}
+                  className="inline-flex items-center gap-2 text-black-600 hover:text-indigo-800 hover:underline"
+                >
+                  {category.name}
+                  
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </div>
