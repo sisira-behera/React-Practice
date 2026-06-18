@@ -41,7 +41,7 @@ export default function ProductFilter() {
   return (
     <div className={`space-y-6 ${isPending ? 'opacity-60' : ''}`}>
       {/* Category Section */}
-      <div>
+      {/* <div>
         <h4 className="font-medium text-gray-900 mb-3">Categories</h4>
         <div className="space-y-2">
           <label className="flex items-center gap-2 cursor-pointer text-sm">
@@ -68,7 +68,7 @@ export default function ProductFilter() {
             </label>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Sorting Section */}
       <div>

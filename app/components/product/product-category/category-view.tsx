@@ -2,20 +2,13 @@
 import { Category } from "@/app/models/Categories";
 import { Link } from "@/i18n/navigation";
 import useSWR from "swr";
-
-const fetcherCategories = (url: string) =>
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Fetched Category data:", data); // Log the raw response data
-      return data;
-    });
+import { categoryServices } from "@/lib/http-services";
 
 export default function CategoryView() {
   // SWR automatically uses the pre-fetched server data on initial mount
   const { data, error } = useSWR(
     "https://dummyjson.com/products/categories",
-    fetcherCategories,
+    categoryServices.getAllCategoriesFetcher,
   );
 
   if (error) return <div>Failed to load.</div>;

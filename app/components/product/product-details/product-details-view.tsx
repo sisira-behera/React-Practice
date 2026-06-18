@@ -1,22 +1,15 @@
 "use client";
 
+import Image from 'next/image'; 
 import { Product } from "@/app/models/Product";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 import React, { useState } from "react";
 import AddToCartButton from "../../share/addtocart/addtocart";
-
-const getProduct = (url: string) =>
-  fetch(url, {
-    next: { revalidate: 60 }, // ISR Time-based window
-  })
-    .then((res) => res.json())
-    .then((data: Product) => {
-      console.log("Fetched Product Data From PDP:", data); // Log the raw response data
-      return data;
-    });
+import { productServices } from "@/lib/http-services";
 
 export default function ProductDetailsView() {
+  
   const params = useParams();
   const locale = params.locale as string;
   const id = params.id as string;
@@ -24,76 +17,24 @@ export default function ProductDetailsView() {
   // SWR automatically uses the pre-fetched server data on initial mount
   const { data, error } = useSWR(
     `https://dummyjson.com/products/${id}`,
-    getProduct,
+    productServices.getProductByIdFetcher,
   );
 
-  // Sample product data configuration
-  /* const data = {
-    id: 1,
-    title: "Essence Mascara Lash Princess",
-    description:
-      "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
-    category: "beauty",
-    price: 9.99,
-    discountPercentage: 10.48,
-    rating: 2.56,
-    stock: 99,
-    tags: ["beauty", "mascara"],
-    brand: "Essence",
-    sku: "BEA-ESS-ESS-001",
-    weight: 4,
-    dimensions: {
-      width: 15.14,
-      height: 13.08,
-      depth: 22.99,
-    },
-    warrantyInformation: "1 week warranty",
-    shippingInformation: "Ships in 3-5 business days",
-    availabilityStatus: "In Stock",
-    reviews: [
-      {
-        rating: 3,
-        comment: "Would not recommend!",
-        date: "2025-04-30T09:41:02.053Z",
-        reviewerName: "Eleanor Collins",
-        reviewerEmail: "eleanor.collins@x.dummyjson.com",
-      },
-      {
-        rating: 4,
-        comment: "Very satisfied!",
-        date: "2025-04-30T09:41:02.053Z",
-        reviewerName: "Lucas Gordon",
-        reviewerEmail: "lucas.gordon@x.dummyjson.com",
-      },
-      {
-        rating: 5,
-        comment: "Highly impressed!",
-        date: "2025-04-30T09:41:02.053Z",
-        reviewerName: "Eleanor Collins",
-        reviewerEmail: "eleanor.collins@x.dummyjson.com",
-      },
-    ],
-    returnPolicy: "No return policy",
-    minimumOrderQuantity: 48,
-    meta: {
-      createdAt: "2025-04-30T09:41:02.053Z",
-      updatedAt: "2025-04-30T09:41:02.053Z",
-      barcode: "5784719087687",
-      qrCode: "https://cdn.dummyjson.com/public/qr-code.png",
-    },
-    images: [
-      "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp",
-    ],
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
-  }; */
-
   // State managers for interactive UI elements
-  const [activeImage, setActiveImage] = useState(data?.images?.[0]);
+  const [activeImage, setActiveImage] = useState<string | undefined>(undefined);
   const [quantity, setQuantity] = useState(1);
 
+ // Set activeImage to the first image when data is available
+  // Avoid setting state inside effect; derive displayed image from state or data
+  const displayedImage: string = activeImage ?? data?.images?.[0] ?? "";
+
+ 
   if (error) return <div>Failed to load.</div>;
   if (!data) return <div>Loading...</div>;
+
+   // You would ideally provide a tiny, 20px-wide version of the image for the base64 blurDataURL
+  const tinyBlurBase64 = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+
 
   return (
     <div className="bg-white min-h-screen text-gray-800">
@@ -104,19 +45,24 @@ export default function ProductDetailsView() {
           <div className="flex flex-col-reverse md:flex-row gap-4">
             {/* Thumbnail Navigation */}
             <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto justify-start">
-              {data?.images?.map((img: string, idx: number) => (
+              {data?.images?.map((pimg: string, idx: number) => (
                 <button
                   key={idx}
-                  onClick={() => setActiveImage(img)}
+                  onClick={() => setActiveImage(pimg)}
                   className={`w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
-                    activeImage === img
+                    activeImage === pimg
                       ? "border-indigo-600 ring-2 ring-indigo-600/20"
                       : "border-gray-200 hover:border-gray-400"
                   }`}
                 >
-                  <img
-                    src={img}
+                  <Image
+                    src={pimg}
                     alt={`View ${idx + 1}`}
+                    width={80}
+                    height={80}
+                    /* sizes="(max-width: 768px) 100vw 100vw, (max-width: 1200px) 200vw, 200vw" */
+                    placeholder="blur"
+                    blurDataURL={tinyBlurBase64}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -125,12 +71,19 @@ export default function ProductDetailsView() {
 
             {/* Active Display Image */}
             <div className="flex-1 aspect-square rounded-2xl bg-gray-50 overflow-hidden border border-gray-100">
-              <img
-                src={activeImage}
-                alt={data?.title}
-                className="w-full h-full object-cover object-center transition-duration-300"
-              />
-            </div>
+              
+              <Image
+                    src={displayedImage}
+                    alt={data?.title}
+                    width={500}
+                    height={500}
+                    /* sizes="(max-width: 768px) 100vw 100vw, (max-width: 1200px) 200vw, 200vw" */
+                    priority={true} // High priority for above-the-fold LCP
+                    placeholder="blur"
+                    blurDataURL={tinyBlurBase64}
+                    className="w-full h-full object-cover"
+                  />
+                          </div>
           </div>
 
           {/* RIGHT COLUMN: Buying and Configuration Panel */}
@@ -201,7 +154,11 @@ export default function ProductDetailsView() {
                 </div>
 
                 {/* Primary Add To Cart CTA Button */}
-                <AddToCartButton id={data.id} name={data.title} price={Number(data.price)} />
+                <AddToCartButton
+                  id={data.id}
+                  name={data.title}
+                  price={Number(data.price)}
+                />
               </div>
             </div>
           </div>

@@ -1,4 +1,8 @@
-import { Link } from "@/i18n/navigation";
+"use client";
+
+import { Link, usePathname } from "@/i18n/navigation";
+import { signIn, signOut, useSession } from "next-auth/react";
+
 import Image from "next/image";
 import logo from "@/assets/next.svg"; // Static image in the assets folder
 import logoGlobe from "@/assets/globe.svg"; // Static image in the assets folder
@@ -7,15 +11,25 @@ import React, { useState } from "react";
 import ThemeSelector from "./themeselector";
 import LanguageSwitcher from "../../share/locale-selector/LanguageSwitcher";
 import Cart from "../../Cart";
-import { useAuth } from "@/app/[locale]/context/AuthContext";
+// import { useAuth } from "@/app/[locale]/context/AuthContext";
 
 export default function Navbar() {
-  const { user, logoutUser } = useAuth();
+  // const { user, logoutUser } = useAuth();
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading";
+  const pathname = usePathname();
+
+  // Extract locale from pathname (e.g., /en/about -> en)
+  const locale = pathname.split("/")[1] || "en";
 
   const [isOpen, setIsOpen] = useState(false);
 
   const productId = "1"; // We can set in the props as well
   const catId = "beauty"; // We can set in the props as well
+
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: `/${locale}` });
+  };
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md fixed w-full z-10">
@@ -35,6 +49,10 @@ export default function Navbar() {
                 <span className="text-xl font-bold">Next Commerce</span>
               </Link>
             </span>
+            <span className="ml-4 text-gray-600 dark:text-gray-400">
+              | 
+            </span>
+            <LanguageSwitcher />
           </div>
 
           {/* Desktop Menu */}
@@ -53,13 +71,13 @@ export default function Navbar() {
             >
               Category
             </Link>
-            <Link
+            {/* <Link
               key="plp"
               href="/plp"
               className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
             >
               PLP
-            </Link>
+            </Link> */}
             <Link
               key={productId}
               href={{ pathname: "/products/[id]", params: { id: productId } }}
@@ -67,10 +85,10 @@ export default function Navbar() {
             >
               PDP
             </Link>
+           
             <span className="p-1"> | </span>
-            <Cart />
             {/* Language Switcher and Auth Links */}
-            {user ? (
+            {/* {user ? (
               <div className="flex gap-4">
                 <span>Welcome, {user.name}!</span>
                 <button onClick={logoutUser} className="text-red-500">
@@ -85,9 +103,52 @@ export default function Navbar() {
               >
                 Login
               </Link>
+            )} */}
+             {session && (
+              <Link
+                href="/myaccount"
+                className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
+              >
+                My Account
+              </Link>
+            )}
+            {isLoading ? (
+              <span>Loading...</span>
+            ) : session ? (
+              <div className="flex items-center space-x-4">
+                {session.user?.image && (
+                  <img
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    className="w-8 h-8 rounded-full"
+                  />
+                )}
+                <span>Hi, {session.user?.name?.split(" ")[0] || "User"}!</span>
+                <button 
+                                onClick={() => handleSignOut()} 
+                                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm"
+                            >
+                                Sign Out
+                            </button>
+                {/* <Link
+                  key="signout"
+                  href="/"
+                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm"
+                >
+                  Sign Out
+                </Link> */}
+              </div>
+            ) : (
+              <Link
+                key="login"
+                href="/login"
+                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm"
+              >
+                Sign In
+              </Link>
             )}
             <span className="p-1"> | </span>
-            <LanguageSwitcher />
+            <Cart />
             {/* Dark Mode Toggle */}
             {/* <ThemeSelector /> */}
           </div>
@@ -122,13 +183,13 @@ export default function Navbar() {
           >
             Category
           </Link>
-          <Link
+          {/* <Link
             key="plp"
             href="/plp"
             className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
           >
             PLP
-          </Link>
+          </Link> */}
           <Link
             key={productId}
             href={{ pathname: "/products/[id]", params: { id: productId } }}
@@ -136,16 +197,55 @@ export default function Navbar() {
           >
             PDP
           </Link>
-          <Link
-            key="login"
-            href="/login"
-            className="block text-gray-800 dark:text-gray-200 hover:text-blue-500 font-semibold"
-          >
-            LOG IN
-          </Link>
+          
           <hr />
-          <LanguageSwitcher /> <span className="p-1"> | </span>{" "}
+          <div className="flex flex-col space-y-2">
+          {session && (
+              <Link
+                href="/myaccount"
+                className="block text-gray-800 dark:text-gray-200 hover:text-blue-500"
+              >
+                My Account
+              </Link>
+            )}
+            {isLoading ? (
+              <span>Loading...</span>
+            ) : session ? (
+              <div className="flex items-center space-x-4">
+                {session.user?.image && (
+                  <img
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    className="w-8 h-8 rounded-full"
+                  />
+                )}
+                <span>Hi, {session.user?.name?.split(" ")[0] || "User"}!</span>
+                <button 
+                                onClick={() => handleSignOut()} 
+                                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm"
+                            >
+                                Sign Out
+                            </button>
+                {/* <Link
+                  key="signout"
+                  href="/"
+                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm"
+                >
+                  Sign Out
+                </Link> */}
+              </div>
+            ) : (
+              <Link
+                key="login"
+                href="/login"
+                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm"
+              >
+                Sign In
+              </Link>
+            )}
+            <Cart />
           <ThemeSelector />
+          </div>
         </div>
       )}
     </nav>

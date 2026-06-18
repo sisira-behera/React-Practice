@@ -20,6 +20,9 @@ export const routing = defineRouting({
     '/plp': {
       de: '/plp' // category listing page (PLP)
     },
+    '/myaccount': {
+      de: '/myaccount' 
+    },
     '/contact': {
       de: '/contact'
     },

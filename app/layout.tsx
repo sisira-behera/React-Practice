@@ -1,17 +1,19 @@
-import { AuthProvider } from './[locale]/context/AuthContext';
 import { CartProvider } from './[locale]/context/CartContext';
+import { AuthProvider } from './providers';
 import Breadcrumbs from './components/share/breadcrumb/breadcrumb';
 import './globals.css';
 
-
-// Since we have a `not-found.tsx` page on the root, a layout file
-// is required, even if it's just passing children through.
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ 
+  children
+}: { 
+  children: React.ReactNode;
+}) {
   return (
-  <CartProvider>
-    <AuthProvider>
-      <Breadcrumbs />
-      {children}
-    </AuthProvider>
-  </CartProvider>)
+    <CartProvider>
+      <AuthProvider>
+        <Breadcrumbs />
+        {children}
+      </AuthProvider>
+    </CartProvider>
+  );
 }

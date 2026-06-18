@@ -4,21 +4,13 @@ import useSWR from 'swr';
 import AddToCartButton from '../../share/addtocart/addtocart';
 import { Link } from '@/i18n/navigation';
 import { Product } from '@/app/models/Product';
-
-
-
-const fetcherProducts = (url: string) => fetch(url).then((res) => res.json()).then((data) => {
-    console.log('Fetched data:', data.products); // Log the raw response data
-    return data.products;
-});
+import { categoryServices } from '@/lib/http-services';
 
 export default function CategoryChildrenView({ slug }: { slug: string; }) {
-
- 
   // SWR automatically uses the pre-fetched server data on initial mount
   const { data, error } = useSWR(
     `https://dummyjson.com/products/category/${slug}`,
-    fetcherProducts,
+    categoryServices.getProductsByCategoryFetcher,
   );
 
   if (error) return <div>Failed to load.</div>;
