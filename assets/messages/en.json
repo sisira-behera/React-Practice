@@ -1,0 +1,32 @@
+{
+  "HomePage": {
+    "title": "A commerce site",
+    "description": "Welcome to our e-commerce site! We offer a wide range of products to cater to all your needs. Whether you're looking for the latest gadgets, fashionable clothing, or home essentials, we've got you covered. Our user-friendly interface and secure payment options ensure a seamless shopping experience. Explore our collection and find the perfect items that suit your style and preferences. Happy shopping!",
+    "continue": "Continue Shopping"
+  },
+  "AboutPage": {
+    "title": "About",
+    "description": "Welcome to our e-commerce site! We offer a wide range of products to cater to all your needs. Whether you're looking for the latest gadgets, fashionable clothing, or home essentials, we've got you covered. Our user-friendly interface and secure payment options ensure a seamless shopping experience. Explore our collection and find the perfect items that suit your style and preferences. Happy shopping!"
+  },
+  "ProductListPage": {
+    "title": "Products",
+    "description": "Browse our collection of products"
+  },
+  "ProductDetailPage": {
+    "title": "Product Detail for Product ID: ",
+    "description": "Displaying data for Product ID: "
+  },
+  "NotFoundPage": {
+    "description": "Requested resource was not found.",
+    "title": "404 | Page not found",
+    "goBack": "Return to homepage"
+  },
+  "ErrorPage": {
+    "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
+    "title": "Something went wrong!"
+  },
+  "LanguageSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, de {Deutsch} en {English} other {Unknown}}"
+  }
+}
