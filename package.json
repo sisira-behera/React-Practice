@@ -2,7 +2,7 @@
   "name": "ecommerce-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sisira-behera.github.io/next-react-app",
+  "homepage": "https://sisira-behera.github.io/React-Practice",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
