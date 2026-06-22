@@ -15,9 +15,7 @@ const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
   },
-  output: 'export', // Forces Next.js to build static HTML files
   images: {
-    unoptimized: true, // Required because GitHub Pages doesn't support image optimization API
     remotePatterns: [
       {
         protocol: 'https',
